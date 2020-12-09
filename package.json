@@ -1,0 +1,12 @@
+{
+  "name": "@toye.io/aoc",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:thomastoye/aoc2020.git",
+  "author": "Thomas Toye <thomas@toye.io>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "mem": "^8.0.0"
+  }
+}
