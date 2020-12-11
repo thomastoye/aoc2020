@@ -23,29 +23,26 @@ const part2 = input => {
     const lines = input.split('\n').filter(line => line !== '').map(line => parseInt(line, 10))
     const deviceJoltageAdapter = Math.max(...lines) + 3;
 
-    const recurse = (notUsedYet, currentJoltage) => {
+    const recurse = mem((currentJoltage, allAdapters) => {
+        const possibleJoltages = allAdapters.filter(joltage => joltage > currentJoltage && joltage <= currentJoltage + 3)
+
         if (currentJoltage === deviceJoltageAdapter) {
-            return [ deviceJoltageAdapter ]
+            return 1
         }
 
-        const possibilities = notUsedYet.filter(num => num - currentJoltage >= 0 && num - currentJoltage < 4)
-
-        if (possibilities.length === 0) {
-            return []
+        if (possibleJoltages.length === 0) {
+            return 0
         }
 
-        console.log({ possibilities, currentJoltage })
-        
-        const result = possibilities.flatMap(poss => recurse(notUsedYet.filter(n => n > poss), poss)).map(res => (res))
-        console.log(`I return ${JSON.stringify(result)}`)
+        return res = possibleJoltages.reduce((acc, poss) => {
+            return acc + recurse(poss, allAdapters)
+        }, 0)
+    })
 
-        return result
-    }
-
-    return recurse([...lines, deviceJoltageAdapter], 0)
+    return recurse(0, [...lines, deviceJoltageAdapter])
 }
 
 module.exports = {
-  part1, part2
+    part1, part2
 };
 
